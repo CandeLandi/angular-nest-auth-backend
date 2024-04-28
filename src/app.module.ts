@@ -12,7 +12,7 @@ import { MongooseModule } from '@nestjs/mongoose';
     ConfigModule.forRoot(),
 
     MongooseModule.forRoot( process.env.MONGO_URI ),
-    
+
     AuthModule
   ],
   controllers: [],

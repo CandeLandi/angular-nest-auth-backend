@@ -9,15 +9,19 @@ import { Model } from 'mongoose';
 export class AuthService {
  
   constructor(
-  @InjectModel(User.name, 'users')
+  @InjectModel(User.name)
   private userModel: Model<User>) {}
 
 
-  create(createUserDto: CreateUserDto) {
-    console.log(createUserDto)
-    const newUser = new this.userModel( createUserDto );
+  create(createUserDto: CreateUserDto): Promise<User>{
 
+/*     const newUser = new this.userModel( createUserDto );
     return newUser.save();
+ */
+// 1- Encriptar las contrasenas
+// 2 - Guardar el usuario
+// 3 - Generar la JWT (jason web token)
+
   }
 
   findAll() {
@@ -35,4 +39,5 @@ export class AuthService {
   remove(id: number) {
     return `This action removes a #${id} auth`;
   }
+
 }

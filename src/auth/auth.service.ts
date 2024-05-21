@@ -49,10 +49,11 @@ export class AuthService {
   }
 
 
-  async register(registerDto: RegisterUserDto): Promise<LoginResponse> {
+  async register(registerDto: RegisterUserDto) {
 
     const user = await this.create(registerDto);
     console.log({ user })
+
     return {
       user: user,
       token: this.getJwtToken({ id: user._id })
@@ -60,7 +61,7 @@ export class AuthService {
   }
 
 
-  async login(loginDto: LoginDto): Promise<LoginResponse> {
+  async login(loginDto: LoginDto) {
 
     const { email, password } = loginDto;
 
@@ -77,7 +78,7 @@ export class AuthService {
 
     return {
       user: rest,
-      token: this.getJwtToken({ id: user._id })
+      token: this.getJwtToken({ id: user.id })
     }
 
   }
@@ -87,19 +88,19 @@ export class AuthService {
   }
 
   async findUserById(id: string) {
-    const user = await this.userModel.findById( id )
+    const user = await this.userModel.findById(id)
     const { password, ...rest } = user.toJSON();
     return rest;
   }
 
-  
+
   getJwtToken(payload: JwtPayload) {
-    const token = this.jwtService.sign(payload);
+    const token = this.jwtService.signAsync(payload);
     return token;
   }
 
-  
-  
+
+
   /*   findOne(id: number) {
       return `This action returns a #${id} auth`;
     }

@@ -33,7 +33,7 @@ export class AuthController {
   }
   //LoginResponse
   @UseGuards(AuthGuard)
-  @Get('check-token')
+  @Get('/check-token')
   checkToken( @Request() req: Request ) {
 
     const user = req['user'] as User;

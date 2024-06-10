@@ -31,7 +31,7 @@ export class AuthService {
         password: bcryptjs.hashSync(password, 10),
         ...userData
       })
-      console.log(newUser)
+     
       await newUser.save();
       const { password: _, ...user } = newUser.toJSON();
       return user;

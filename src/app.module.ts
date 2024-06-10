@@ -3,6 +3,7 @@ import { ConfigModule } from '@nestjs/config';
 import { MongooseModule } from '@nestjs/mongoose';
 
 import { AuthModule } from './auth/auth.module';
+import { HeroesModule } from './heroes/heroes.module';
 
 @Module({
   imports: [
@@ -13,6 +14,8 @@ import { AuthModule } from './auth/auth.module';
     } ),
 
     AuthModule,
+
+    HeroesModule,
 
   ],
   controllers: [],

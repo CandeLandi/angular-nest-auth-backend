@@ -2,7 +2,7 @@ import { IsString, IsBoolean, IsOptional } from 'class-validator';
 
 export class CreateHeroeDto {
 
-    
+
     @IsString()
     superhero: string;
 
@@ -14,6 +14,9 @@ export class CreateHeroeDto {
 
     @IsString()
     characters?: string;
+
+    @IsString()
+    first_appearance?: string;
 
     @IsString()
     @IsOptional()

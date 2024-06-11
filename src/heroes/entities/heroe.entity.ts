@@ -15,6 +15,9 @@ export class Heroe {
     @Prop({ required: true })
     alter_ego?: string;
 
+    @Prop({ required: true })
+    first_appearance?: string;
+
     @Prop()
     characters: string;
 

@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Body, Put, Param, Delete } from '@nestjs/common';
+import { Controller, Get, Post, Body, Put, Param, Delete, NotFoundException } from '@nestjs/common';
 import { HeroesService } from './heroes.service';
 import { CreateHeroeDto } from './dto/create-heroe.dto';
 import { UpdateHeroeDto } from './dto/update-heroe.dto';
@@ -9,7 +9,6 @@ export class HeroesController {
 
     @Post()
     create(@Body() createHeroeDto: CreateHeroeDto) {
-
         return this.heroesService.create(createHeroeDto);
     }
 
@@ -18,18 +17,24 @@ export class HeroesController {
         return this.heroesService.findAll();
     }
 
-    @Get('id')
+    @Get(':id')
     findOne(@Param('id') id: string) {
-        return this.heroesService.findOne(id);
+        return this.heroesService.findOne(id).catch((error) => {
+            throw new NotFoundException(error.message);
+        });
     }
 
-    @Put('id')
+    @Put(':id')
     update(@Param('id') id: string, @Body() updateHeroeDto: UpdateHeroeDto) {
-        return this.heroesService.update(id, updateHeroeDto);
+        return this.heroesService.update(id, updateHeroeDto).catch((error) => {
+            throw new NotFoundException(error.message);
+        });
     }
 
-    @Delete('id')
+    @Delete(':id')
     remove(@Param('id') id: string) {
-        return this.heroesService.remove(id);
+        return this.heroesService.remove(id).catch((error) => {
+            throw new NotFoundException(error.message);
+        });
     }
 }

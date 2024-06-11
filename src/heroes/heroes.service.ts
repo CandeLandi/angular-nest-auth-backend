@@ -1,6 +1,6 @@
-import { Injectable, NotFoundException } from '@nestjs/common';
+import { Injectable, NotFoundException, BadRequestException } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
-import { Model } from 'mongoose';
+import { Model, isValidObjectId } from 'mongoose';
 import { Heroe } from './entities/heroe.entity';
 import { CreateHeroeDto } from './dto/create-heroe.dto';
 import { UpdateHeroeDto } from './dto/update-heroe.dto';
@@ -20,24 +20,36 @@ export class HeroesService {
     async findAll(): Promise<Heroe[]> {
         return this.heroeModel.find().exec();
     }
-    async findOne(id: string): Promise<Heroe | null> {
-        const heroe = await this.heroeModel.findById(id).exec();
+
+    async findOne(_id: string): Promise<Heroe | null> {
+        if (!isValidObjectId(_id)) {
+            throw new BadRequestException(`Invalid ID format: ${_id}`);
+        }
+        const heroe = await this.heroeModel.findById(_id).exec();
+        if (!heroe) {
+            throw new NotFoundException(`Heroe #${_id} not found`);
+        }
         return heroe;
     }
 
-
-    async update(id: string, updateHeroeDto: UpdateHeroeDto): Promise<Heroe> {
-        const updatedHeroe = await this.heroeModel.findByIdAndUpdate(id, updateHeroeDto, { new: true }).exec();
+    async update(_id: string, updateHeroeDto: UpdateHeroeDto): Promise<Heroe> {
+        if (!isValidObjectId(_id)) {
+            throw new BadRequestException(`Invalid ID format: ${_id}`);
+        }
+        const updatedHeroe = await this.heroeModel.findByIdAndUpdate(_id, updateHeroeDto, { new: true }).exec();
         if (!updatedHeroe) {
-            throw new NotFoundException(`Heroe #${id} not found`);
+            throw new NotFoundException(`Heroe #${_id} not found`);
         }
         return updatedHeroe;
     }
 
-    async remove(id: string): Promise<Heroe> {
-        const deletedHeroe = await this.heroeModel.findByIdAndDelete(id).exec();
+    async remove(_id: string): Promise<Heroe> {
+        if (!isValidObjectId(_id)) {
+            throw new BadRequestException(`Invalid ID format: ${_id}`);
+        }
+        const deletedHeroe = await this.heroeModel.findByIdAndDelete(_id).exec();
         if (!deletedHeroe) {
-            throw new NotFoundException(`Heroe #${id} not found`);
+            throw new NotFoundException(`Heroe #${_id} not found`);
         }
         return deletedHeroe;
     }

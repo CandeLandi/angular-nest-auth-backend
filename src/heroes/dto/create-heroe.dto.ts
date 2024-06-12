@@ -20,5 +20,5 @@ export class CreateHeroeDto {
 
     @IsString()
     @IsOptional()
-    images?: string;
+    alt_img?: string;
 }

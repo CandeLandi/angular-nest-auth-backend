@@ -18,8 +18,8 @@ export class Heroe {
   @Prop()
   characters: string;
 
-  @Prop()
-  alt_img: string = 'true';
+  @Prop({ default: 'true' })
+  alt_img: string;
 }
 
 export const HeroeSchema = SchemaFactory.createForClass(Heroe);

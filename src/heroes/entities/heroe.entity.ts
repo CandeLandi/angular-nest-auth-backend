@@ -18,7 +18,7 @@ export class Heroe {
   @Prop()
   characters: string;
 
-  @Prop({ default: 'true'} )
+  @Prop({ default: 'true'})
   alt_img?: string;
 }
 

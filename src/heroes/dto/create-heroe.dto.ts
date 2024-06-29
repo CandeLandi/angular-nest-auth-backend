@@ -1,4 +1,4 @@
-import { IsString, IsBoolean, IsOptional } from 'class-validator';
+import { IsString, IsOptional } from 'class-validator';
 
 export class CreateHeroeDto {
 
@@ -18,6 +18,5 @@ export class CreateHeroeDto {
     first_appearance?: string;
 
     @IsString()
-    @IsOptional()
-    alt_img?: string = 'true';
+    alt_img?: string ;
 }

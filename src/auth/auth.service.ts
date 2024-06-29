@@ -76,9 +76,11 @@ export class AuthService {
 
     const { password: _, ...rest } = user.toJSON();
 
+    
+  console.log(this.getJwtToken({ id: user._id }))
     return {
       user: rest,
-      token: this.getJwtToken({ id: user.id })
+      token: this.getJwtToken({ id: user._id })
     }
 
   }

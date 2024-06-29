@@ -14,6 +14,7 @@ export class HeroesService {
 
     async create(createHeroeDto: CreateHeroeDto): Promise<Heroe> {
         const newHeroe = new this.heroeModel(createHeroeDto);
+      console.log(newHeroe)
         return newHeroe.save();
     }
 

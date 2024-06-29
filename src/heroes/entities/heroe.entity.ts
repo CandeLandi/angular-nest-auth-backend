@@ -1,31 +1,25 @@
-import { Prop, Schema, SchemaFactory } from "@nestjs/mongoose";
-
-
+import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 
 @Schema()
 export class Heroe {
-    _id?: string;
- 
-    @Prop({ unique: true, required: true })
-    superhero: string;
 
-    @Prop({ required: true })
-    publisher: string;
+  @Prop({ unique: true, required: true })
+  superhero: string;
 
-    @Prop({ required: true })
-    alter_ego?: string;
+  @Prop({ required: true })
+  publisher: string;
 
-    @Prop({ required: true })
-    first_appearance?: string;
+  @Prop({ required: true })
+  alter_ego?: string;
 
-    @Prop()
-    characters: string;
+  @Prop({ required: true })
+  first_appearance?: string;
 
-    @Prop({ default: true })
-    alt_img?: boolean;
+  @Prop()
+  characters: string;
 
+  @Prop()
+  alt_img: string = 'true';
 }
 
-export const HeroeSchema = SchemaFactory.createForClass(Heroe)
-
-
+export const HeroeSchema = SchemaFactory.createForClass(Heroe);

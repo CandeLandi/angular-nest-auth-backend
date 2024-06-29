@@ -15,5 +15,5 @@ export class UpdateHeroeDto {
 
     @IsString()
     @IsOptional()
-    alt_img?: boolean;
+    alt_img?: string;
 }

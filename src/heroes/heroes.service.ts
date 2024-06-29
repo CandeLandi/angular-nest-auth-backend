@@ -10,11 +10,10 @@ export class HeroesService {
     constructor(
         @InjectModel(Heroe.name)
         private heroeModel: Model<Heroe>,
-    ) { }
+    ) {}
 
     async create(createHeroeDto: CreateHeroeDto): Promise<Heroe> {
         const newHeroe = new this.heroeModel(createHeroeDto);
-     
         return newHeroe.save();
     }
 
@@ -37,7 +36,9 @@ export class HeroesService {
         if (!isValidObjectId(_id)) {
             throw new BadRequestException(`Invalid ID format: ${_id}`);
         }
-        const updatedHeroe = await this.heroeModel.findByIdAndUpdate(_id, updateHeroeDto, { new: true }).exec();
+        const updateData = { ...updateHeroeDto };
+        delete updateData._id; // Eliminar _id si existe en el DTO
+        const updatedHeroe = await this.heroeModel.findByIdAndUpdate(_id, updateData, { new: true }).exec();
         if (!updatedHeroe) {
             throw new NotFoundException(`Heroe #${_id} not found`);
         }

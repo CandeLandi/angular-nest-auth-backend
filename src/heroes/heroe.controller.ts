@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Body, Put, Param, Delete, NotFoundException, BadRequestException } from '@nestjs/common';
+import { Controller, Get, Post, Body, Put, Param, Delete, NotFoundException } from '@nestjs/common';
 import { HeroesService } from './heroes.service';
 import { CreateHeroeDto } from './dto/create-heroe.dto';
 import { UpdateHeroeDto } from './dto/update-heroe.dto';
@@ -9,9 +9,7 @@ export class HeroesController {
 
     @Post()
     create(@Body() createHeroeDto: CreateHeroeDto) {
-        return this.heroesService.create(createHeroeDto).catch((error) => {
-            throw new BadRequestException(error.message);
-        });
+        return this.heroesService.create(createHeroeDto);
     }
 
     @Get()

@@ -3,7 +3,6 @@ import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 @Schema()
 export class Heroe {
 
-  @Prop()
 
   @Prop({ unique: true, required: true })
   superhero: string;

@@ -4,7 +4,6 @@ import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 export class Heroe {
 
   @Prop()
-  _id: string;
 
   @Prop({ unique: true, required: true })
   superhero: string;

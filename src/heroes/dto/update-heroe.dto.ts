@@ -1,19 +1,21 @@
 import { IsString, IsBoolean, IsOptional } from 'class-validator';
 
 export class UpdateHeroeDto {
-    @IsString()
-    superhero: string;
+  @IsString()
+  _id?: string;
 
-    @IsString()
-    publisher: string;
+  @IsString()
+  superhero: string;
 
-    @IsString()
-    alter_ego?: string;
+  @IsString()
+  publisher: string;
 
-    @IsString()
-    characters?: string;
+  @IsString()
+  alter_ego?: string;
 
-    @IsString()
-    @IsOptional()
-    alt_img?: string;
+  @IsString()
+  characters?: string;
+
+  @IsString()
+  alt_img?: string;
 }
